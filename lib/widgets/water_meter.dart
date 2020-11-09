@@ -12,9 +12,10 @@ class WaterMeterState extends State<WaterMeter> {
   //默认初始值为0.0
   double waterHeight = 0.0;
   WaterController waterController = WaterController();
-  Function _changeWaterAnimation() {
+  void _changeWaterAnimation() {
     setState(() {
-      waterController.changeWaterHeight(0.80);
+      waterHeight = 0.80;
+      waterController.changeWaterHeight(waterHeight);
     });
   }
 
@@ -23,8 +24,8 @@ class WaterMeterState extends State<WaterMeter> {
     super.initState();
     WidgetsBinding widgetsBinding = WidgetsBinding.instance;
     widgetsBinding.addPostFrameCallback((callback) {
-      //这里写你想要显示的百分比
-      waterController.changeWaterHeight(0.56);
+      waterHeight = 0.30;
+      waterController.changeWaterHeight(waterHeight);
     });
   }
 
@@ -39,7 +40,7 @@ class WaterMeterState extends State<WaterMeter> {
             child: new WaveProgressBar(
               flowSpeed: 2.0,
               waveDistance: 45.0,
-              waterColor: Colors.red,
+              waterColor: waterHeight <= 0.35 ? Colors.lightBlue : Colors.green,
               //  waterHeight < 85 ? Color(0xFF68BEFC) :
               //strokeCircleColor: Color(0x50e16009),
               heightController: waterController,

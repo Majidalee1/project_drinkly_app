@@ -1,9 +1,8 @@
-import 'package:drinkly/widgets/nav_drawer.dart';
-import 'package:drinkly/widgets/water_meter.dart';
-import 'package:waveprogressbar_flutter/waveprogressbar_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import "../widgets/show_dialog.dart";
+
+import 'package:drinkly/widgets/nav_drawer.dart';
+import 'package:drinkly/widgets/water_meter.dart';
 
 class MainScreen extends StatelessWidget {
   @override
@@ -35,22 +34,19 @@ class _MeterScreenState extends State<MeterScreen> {
     return Scaffold(
       drawer: NavDrawer(),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(90.0),
+        preferredSize: Size.fromHeight(70.0),
         child: AppBar(
+          iconTheme: new IconThemeData(
+              color: Colors.black54,
+              opacity: 0.90,
+              size: Theme.of(context).iconTheme.size),
           elevation: 0,
           backgroundColor: Theme.of(context).accentColor,
-          // leading: IconButton(
-          //   icon: Icon(Icons.notifications_active),
-          //   onPressed: () {},
-          //   iconSize: 60.0,
-          //   color: Colors.black54,
-          // ),
           actions: [
             IconButton(
               icon: Icon(Icons.sort),
               onPressed: _showDialog,
-              iconSize: 60.0,
-              color: Colors.black54,
+              // color: Colors.black54,
             ),
           ],
         ),

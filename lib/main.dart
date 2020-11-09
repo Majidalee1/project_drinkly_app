@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        iconTheme: ThemeData.light().iconTheme.copyWith(size: 60.0),
         primaryColor: Colors.deepOrange,
         accentColor: Color(0xfffEf9eb),
       ),

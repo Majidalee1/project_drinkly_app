@@ -11,34 +11,33 @@ class NavDrawer extends StatelessWidget {
             child: Text(
               'Side menu',
               style: TextStyle(color: Colors.white, fontSize: 25),
+              textAlign: TextAlign.center,
             ),
             decoration: BoxDecoration(
-              color: Colors.green,
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30.0),
+                  bottomRight: Radius.circular(30.0)),
             ),
           ),
           ListTile(
-            leading: Icon(Icons.input),
-            title: Text('Welcome'),
+            leading: Icon(Icons.history),
+            title: Text('History'),
             onTap: () => {},
           ),
           ListTile(
-            leading: Icon(Icons.verified_user),
-            title: Text('Profile'),
+            leading: Icon(Icons.timer),
+            title: Text('Remainder'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
+            leading: Icon(Icons.rounded_corner),
+            title: Text('usage record'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.border_color),
-            title: Text('Feedback'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
+            leading: Icon(Icons.info_outline),
+            title: Text('About'),
             onTap: () => {Navigator.of(context).pop()},
           ),
         ],

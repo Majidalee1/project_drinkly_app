@@ -12,7 +12,10 @@ class FavoriteContracts extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("Favorite Contracts"),
-              Icon(Icons.contact_mail),
+              Icon(
+                Icons.contact_mail,
+                size: 30.0,
+              ),
             ],
           ),
         ),

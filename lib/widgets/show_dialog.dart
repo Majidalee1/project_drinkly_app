@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class showDialog extends StatefulWidget {
+class ShowDialog extends StatefulWidget {
   @override
-  _showDialogState createState() => _showDialogState();
+  _ShowDialogState createState() => _ShowDialogState();
 }
 
-class _showDialogState extends State<showDialog> {
+class _ShowDialogState extends State<ShowDialog> {
   @override
   Widget build(BuildContext context) {
     return Container(
