@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "559535718247",
+    "firebase_url": "https://finalyearprojectesp32.firebaseio.com",
+    "project_id": "finalyearprojectesp32",
+    "storage_bucket": "finalyearprojectesp32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559535718247:android:aca6912cddb64e164ff9c2",
+        "android_client_info": {
+          "package_name": "com.example.androidprojectdrinksmart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "559535718247-dhuv2gf99p5fm7lm566d1hup074l0eji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO_LMRHrmbTeYWrdJAPvCdDd23GMepoKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559535718247-dhuv2gf99p5fm7lm566d1hup074l0eji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559535718247:android:82b129dcc3eaf4d84ff9c2",
+        "android_client_info": {
+          "package_name": "com.itians.drinkly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "559535718247-dhuv2gf99p5fm7lm566d1hup074l0eji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO_LMRHrmbTeYWrdJAPvCdDd23GMepoKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559535718247-dhuv2gf99p5fm7lm566d1hup074l0eji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

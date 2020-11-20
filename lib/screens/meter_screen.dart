@@ -1,5 +1,7 @@
 import 'package:drinkly/widgets/nav_drawer.dart';
 import 'package:drinkly/widgets/water_meter.dart';
+import 'package:firebase_database/firebase_database.dart';
+
 import 'package:flutter/material.dart';
 
 class MeterScreen extends StatefulWidget {
@@ -12,6 +14,24 @@ class _MeterScreenState extends State<MeterScreen> {
     AlertDialog(
       title: Text("hello"),
     );
+  }
+
+  int tdsValue = 0;
+  double tdsTemp = 0.0;
+
+  sendMessage() {
+    var _firebaseRef = FirebaseDatabase().reference().child('Sensor');
+    _firebaseRef.reference().once().then((DataSnapshot snap) {
+      var value = snap.value;
+      tdsValue = value['data'];
+      tdsTemp = value['Temperature'];
+    });
+  }
+
+  void getValue() {
+    setState(() {
+      sendMessage();
+    });
   }
 
   @override
@@ -41,16 +61,22 @@ class _MeterScreenState extends State<MeterScreen> {
         children: [
           Center(
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.20,
+              height: MediaQuery.of(context).size.height * 0.30,
               child: Column(
                 children: [
-                  Text(
-                    "48%",
-                    style: TextStyle(color: Colors.black, fontSize: 60.0),
+                  IconButton(
+                      icon: Icon(Icons.rotate_left), onPressed: getValue),
+                  Container(
+                    child: Text(
+                      "$tdsTemp°C",
+                      style: TextStyle(
+                        fontSize: 60.0,
+                      ),
+                    ),
                   ),
                   Text(
-                    "TDS-Value",
-                    style: TextStyle(color: Colors.black54, fontSize: 20.0),
+                    "Temperature",
+                    style: TextStyle(color: Colors.black54, fontSize: 30.0),
                   ),
                 ],
               ),
@@ -61,7 +87,9 @@ class _MeterScreenState extends State<MeterScreen> {
             decoration: BoxDecoration(
               color: Colors.white,
             ),
-            child: WaterMeter(),
+            child: WaterMeter(
+              fb_tdsValue: tdsValue,
+            ),
           )
         ],
       ),

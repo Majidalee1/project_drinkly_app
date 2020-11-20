@@ -9,7 +9,7 @@ class TdsData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var ExpandedTextWidget = Container(
+    var expandedTextWidget = Container(
         padding: EdgeInsets.all(30.0),
         child: ExpandablePanel(
           header: Container(
@@ -41,7 +41,7 @@ class TdsData extends StatelessWidget {
     return ListView.builder(
       itemCount: 7,
       itemBuilder: (context, index) {
-        return Container(child: ExpandedTextWidget);
+        return Container(child: expandedTextWidget);
       },
     );
   }

@@ -1,3 +1,4 @@
+import 'package:drinkly/widgets/database.dart';
 import 'package:flutter/Material.dart';
 
 class History extends StatelessWidget {
