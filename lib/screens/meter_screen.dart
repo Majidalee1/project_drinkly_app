@@ -34,6 +34,20 @@ class _MeterScreenState extends State<MeterScreen> {
     });
   }
 
+  _functionToExecute() {}
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      setState(() {
+        sendMessage();
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

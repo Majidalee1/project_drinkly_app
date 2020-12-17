@@ -40,10 +40,16 @@ class WaterMeterState extends State<WaterMeter> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding widgetsBinding = WidgetsBinding.instance;
-    widgetsBinding.addPostFrameCallback((callback) {
-      waterHeight = widget.fb_tdsValue / 1000;
-      waterController.changeWaterHeight(waterHeight);
+    // WidgetsBinding widgetsBinding = WidgetsBinding.instance;
+    // widgetsBinding.addPostFrameCallback((callback) {
+    //   waterHeight = widget.fb_tdsValue / 1000;
+    //   waterController.changeWaterHeight(waterHeight);
+    // });
+
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      setState(() {
+        _changeWaterAnimation();
+      });
     });
   }
 

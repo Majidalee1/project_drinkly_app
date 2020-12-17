@@ -20,9 +20,8 @@ class NavDrawer extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20.0),
-                    bottomRight: Radius.circular(20.0)),
+                borderRadius:
+                    BorderRadius.only(bottomRight: Radius.circular(90.0)),
               ),
             ),
             ListTile(
@@ -58,6 +57,10 @@ class NavDrawer extends StatelessWidget {
                   applicationLegalese: "Drinkly_APP",
                 )
               },
+            ),
+            Container(
+              padding: EdgeInsetsDirectional.only(top: 50),
+              child: Image.asset("assets/images/img.png"),
             ),
           ],
         ),
