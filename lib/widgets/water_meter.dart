@@ -3,8 +3,9 @@ import 'package:waveprogressbar_flutter/waveprogressbar_flutter.dart';
 
 class WaterMeter extends StatefulWidget {
   final int fb_tdsValue;
+  final Function changewaterValue;
 
-  const WaterMeter({Key key, this.fb_tdsValue}) : super(key: key);
+  const WaterMeter({this.fb_tdsValue, this.changewaterValue});
 
   @override
   State<StatefulWidget> createState() {
@@ -17,36 +18,18 @@ class WaterMeterState extends State<WaterMeter> {
   double waterHeight = 0.0;
   Color initialMeterColor = Colors.green;
   WaterController waterController = WaterController();
-  Color _getColor() {
-    Color meterColor;
-    waterHeight = widget.fb_tdsValue / 1000;
-    if (waterHeight <= 0.35) {
-      meterColor = Colors.green;
-    } else {
-      meterColor = Colors.blueGrey;
-    }
-
-    return meterColor;
-  }
 
   void _changeWaterAnimation() {
     setState(() {
       waterHeight = widget.fb_tdsValue / 1000;
       waterController.changeWaterHeight(waterHeight);
-      initialMeterColor = _getColor();
     });
   }
 
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding widgetsBinding = WidgetsBinding.instance;
-    // widgetsBinding.addPostFrameCallback((callback) {
-    //   waterHeight = widget.fb_tdsValue / 1000;
-    //   waterController.changeWaterHeight(waterHeight);
-    // });
-
-    Future.delayed(const Duration(milliseconds: 2000), () {
+    Future.delayed(const Duration(milliseconds: 3000), () {
       setState(() {
         _changeWaterAnimation();
       });
@@ -65,10 +48,10 @@ class WaterMeterState extends State<WaterMeter> {
             child: new WaveProgressBar(
               flowSpeed: 2.0,
               waveDistance: 45.0,
-              waterColor: initialMeterColor,
+              waterColor: Colors.blue,
               //  waterHeight <= 0.35 ? Colors.green : Colors.lightBlue,
               //  waterHeight < 85 ? Color(0xFF68BEFC) :
-              strokeCircleColor: Colors.black38,
+              strokeCircleColor: Colors.black,
               heightController: waterController,
               percentage: waterHeight,
               size: new Size(300, 300),
