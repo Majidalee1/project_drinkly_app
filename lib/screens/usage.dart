@@ -1,3 +1,4 @@
+import 'package:drinkly/models/usage_data.dart';
 import 'package:drinkly/widgets/tds_data.dart';
 import 'package:flutter/material.dart';
 
@@ -22,9 +23,12 @@ class UsageRecord extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              Container(child: TdsData()),
-              TdsData(),
-              TdsData(),
+              Container(
+                  child: TdsData(
+                Tdsdata: Tdsdata,
+              )),
+              TdsData(Tdsdata: Tdsdata),
+              TdsData(Tdsdata: Tdsdata),
             ],
           ),
         ),

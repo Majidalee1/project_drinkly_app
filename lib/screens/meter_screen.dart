@@ -1,10 +1,10 @@
-import 'package:drinkly/models/usage_data.dart';
-import 'package:drinkly/widgets/nav_drawer.dart';
-import 'package:drinkly/widgets/water_meter.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:circle_wave_progress/circle_wave_progress.dart';
+import 'package:connection_verify/connection_verify.dart';
 
-import 'package:flutter/material.dart';
-import 'package:waveprogressbar_flutter/waveprogressbar_flutter.dart';
+import 'package:drinkly/widgets/nav_drawer.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/Material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MeterScreen extends StatefulWidget {
   @override
@@ -12,150 +12,133 @@ class MeterScreen extends StatefulWidget {
 }
 
 class _MeterScreenState extends State<MeterScreen> {
-  void _showDialog() {
-    AlertDialog(
-      title: Text("hello"),
-    );
-  }
-
-  var tdsValue;
-  var tdsTemp;
-
-  // sendMessage() {
-  //   var _firebaseRef = FirebaseDatabase().reference().child('Sensor');
-  //   _firebaseRef.reference().once().then((DataSnapshot snap) {
-  //     var value = snap.value;
-  //     tdsValue = value['data'];
-  //     tdsTemp = value['Temperature'];
-  //   });
-  // }
-
+  var value;
+  var demoTdsValue = 200;
+  var tdsValue = 10;
+  var maxValue = 0;
+  var tdsTemp = 0.0;
   final databaseReferenceTest = FirebaseDatabase.instance.reference();
 
   sendMessage() {
     databaseReferenceTest.child('Sensor').onValue.listen((event) {
       var snap = event.snapshot;
-
-      if (snap.value != null) {
-        setState(() {
-          tdsValue = snap.value['data'];
-          tdsTemp = snap.value['Temperature'];
-          print(snap.value['Temperature']);
-        });
-      } else {
-        tdsValue = 0;
-        tdsTemp = 0;
-      }
+      setState(() {
+        tdsValue = snap.value['data'];
+        tdsTemp = snap.value['Temperature'];
+        maxValue = snap.value['data'];
+        print(snap.value['data']);
+      });
     });
   }
 
-  double waterHeight = 0.0;
-  WaterController waterController = WaterController();
-
-  Color get waterColor {
-    if (tdsValue >= 350)
-      return Colors.green;
-    else {
-      return Colors.blue;
+  double get getTdsValue {
+    if (tdsValue == Null) {
+      tdsValue = 0;
+    } else if (tdsValue >= 990) {
+      tdsValue = 990;
+      return tdsValue / 10.0;
+    } else {
+      return tdsValue / 10.0;
     }
   }
 
-  void _changeWaterAnimation() {
-    setState(() {
-      waterHeight = tdsValue / 1000;
-      waterController.changeWaterHeight(waterHeight);
-    });
+  Color get getColor {
+    if (tdsValue == null) {
+      tdsValue = 10;
+    } else if (tdsValue > 900) {
+      return Colors.red;
+    } else if (tdsValue < 300) {
+      return Colors.green[600];
+    } else if (tdsValue > 300 && tdsValue <= 600) {
+      return Colors.yellow[600];
+    } else {
+      return Colors.orange[800];
+    }
   }
 
-  void getValue() {
-    setState(() {
-      sendMessage();
-      _changeWaterAnimation();
-    });
+  void getConnectionStatus() async {
+    if (await ConnectionVerify.connectionStatus()) {
+      print("I have network connection!");
+      //Do your online stuff here
+    } else {
+      print("I don't have network connection!");
+      Fluttertoast.showToast(
+        msg: "No internet Connected",
+        backgroundColor: Colors.red,
+      );
+    }
   }
 
   @override
   void initState() {
     // TODO: implement initState
+    getConnectionStatus();
+    sendMessage();
     super.initState();
-
-    Future.delayed(const Duration(milliseconds: 400), () {
-      setState(() {
-        sendMessage();
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: NavDrawer(),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.0),
-        child: AppBar(
-          iconTheme: new IconThemeData(
-              color: Colors.black54,
-              opacity: 0.90,
-              size: Theme.of(context).iconTheme.size),
-          elevation: 0,
-          backgroundColor: Theme.of(context).accentColor,
-          actions: [
-            IconButton(
-              icon: Icon(Icons.sort),
-              onPressed: _showDialog,
-              // color: Colors.black54,
-            ),
-          ],
+    return MaterialApp(
+      home: Scaffold(
+        drawer: NavDrawer(),
+        appBar: AppBar(
+          title: Text("Drinkly"),
         ),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.30,
-              child: Column(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 200,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(
-                      icon: Icon(Icons.rotate_left), onPressed: getValue),
-                  Container(
-                    child: Text(
-                      "$tdsTemp°C",
-                      style: TextStyle(
-                        fontSize: 60.0,
-                      ),
+                  Text(
+                    "${tdsTemp.toStringAsFixed(1)}",
+                    style: TextStyle(
+                      color: Colors.purple[800],
+                      fontSize: 70.0,
                     ),
                   ),
-                  Text(
-                    "Temperature",
-                    style: TextStyle(color: Colors.black54, fontSize: 30.0),
+                  Container(
+                    height: 120,
+                    child: Image.asset('assets/images/centigrade.png'),
                   ),
                 ],
               ),
             ),
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.50,
-            decoration: BoxDecoration(
-              color: Colors.white,
+            Text("TDS VALUE",
+                style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Raleway')),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                SafeArea(
+                  bottom: true,
+                  child: Container(
+                    child: CircleWaveProgress(
+                      size: MediaQuery.of(context).size.height * 0.50,
+                      borderWidth: 10.0,
+                      backgroundColor: Colors.transparent,
+                      borderColor: Colors.black45,
+                      waveColor: getColor,
+                      progress: getTdsValue,
+                    ),
+                  ),
+                ),
+                Align(
+                  child: Text(
+                    "$maxValue",
+                    style: TextStyle(fontSize: 70.0),
+                  ),
+                ),
+              ],
             ),
-            child: WaveProgressBar(
-              flowSpeed: 2.0,
-              waveDistance: 45.0,
-              waterColor: waterColor,
-              //  waterHeight <= 0.35 ? Colors.green : Colors.lightBlue,
-              //  waterHeight < 85 ? Color(0xFF68BEFC) :
-              strokeCircleColor: Colors.black38,
-              heightController: waterController,
-              percentage: waterHeight,
-              size: new Size(300, 300),
-              textStyle: new TextStyle(
-                  color: Colors.black54,
-                  fontSize: 60.0,
-                  fontWeight: FontWeight.bold),
-            ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

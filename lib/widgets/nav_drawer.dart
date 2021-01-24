@@ -13,10 +13,26 @@ class NavDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text(
-                'Side menu',
-                style: TextStyle(color: Colors.white, fontSize: 25),
-                textAlign: TextAlign.center,
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 40.0,
+                    child: ClipOval(
+                      child: Image.asset("assets/images/logo.jpg"),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      "Drinkly",
+                      style: TextStyle(
+                        fontSize: 34.0,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  )
+                ],
               ),
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
@@ -24,21 +40,21 @@ class NavDrawer extends StatelessWidget {
                     BorderRadius.only(bottomRight: Radius.circular(90.0)),
               ),
             ),
-            ListTile(
-                leading: Icon(Icons.history),
-                title: Text('History'),
-                onTap: () => {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => History()))
-                    }),
-            ListTile(
-              leading: Icon(Icons.timer),
-              title: Text('Remainder'),
-              onTap: () => {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Remainder()))
-              },
-            ),
+            // ListTile(
+            //     leading: Icon(Icons.history),
+            //     title: Text('History'),
+            //     onTap: () => {
+            //           Navigator.push(context,
+            //               MaterialPageRoute(builder: (context) => History()))
+            //         }),
+            // ListTile(
+            //   leading: Icon(Icons.timer),
+            //   title: Text('Remainder'),
+            //   onTap: () => {
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => Remainder()))
+            //   },
+            // ),
             ListTile(
               leading: Icon(Icons.rounded_corner),
               title: Text('Info'),
@@ -54,12 +70,12 @@ class NavDrawer extends StatelessWidget {
                 showAboutDialog(
                   context: context,
                   applicationIcon: Icon(Icons.add_shopping_cart),
-                  applicationLegalese: "Drinkly_APP",
+                  applicationLegalese: "Drinkly",
                 )
               },
             ),
             Container(
-              padding: EdgeInsetsDirectional.only(top: 50),
+              padding: EdgeInsetsDirectional.only(top: 150),
               child: Image.asset("assets/images/img.png"),
             ),
           ],

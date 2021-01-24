@@ -23,11 +23,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  waveprogressbar_flutter:
-    path: ./waveprogressbar_flutter-0.1.2/
   expandable: ^4.1.4
   firebase_database: 3.1.6
   firebase_core: ^0.4.0
+  circle_wave_progress: ^0.0.4
+  provider: ^3.0.0
+  connection_verify:
+  fluttertoast: ^7.1.6
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -71,5 +73,9 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
