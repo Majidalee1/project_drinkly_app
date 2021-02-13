@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:connection_verify/connection_verify.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
 
 class History extends StatefulWidget {
   @override

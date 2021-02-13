@@ -1,6 +1,8 @@
+import 'package:drinkly/models/usage_data.dart';
 import 'package:drinkly/screens/history.dart';
 import 'package:drinkly/screens/remainder.dart';
 import 'package:drinkly/screens/usage.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -47,14 +49,7 @@ class NavDrawer extends StatelessWidget {
             //           Navigator.push(context,
             //               MaterialPageRoute(builder: (context) => History()))
             //         }),
-            // ListTile(
-            //   leading: Icon(Icons.timer),
-            //   title: Text('Remainder'),
-            //   onTap: () => {
-            //     Navigator.push(context,
-            //         MaterialPageRoute(builder: (context) => Remainder()))
-            //   },
-            // ),
+
             ListTile(
               leading: Icon(Icons.rounded_corner),
               title: Text('Info'),
@@ -64,14 +59,35 @@ class NavDrawer extends StatelessWidget {
               },
             ),
             ListTile(
+              leading: Icon(Icons.link),
+              title: Text('Our Website'),
+              onTap: () {},
+            ),
+            ListTile(
               leading: Icon(Icons.info_outline),
               title: Text('About'),
               onTap: () => {
                 showAboutDialog(
-                  context: context,
-                  applicationIcon: Icon(Icons.add_shopping_cart),
-                  applicationLegalese: "Drinkly",
-                )
+                    context: context,
+                    applicationIcon: Image.asset(
+                      'assets/images/logo.jpg',
+                      width: 70,
+                      height: 70,
+                    ),
+                    applicationName: 'Drinkly',
+                    applicationLegalese:
+                        '''This Application was developed by a team of Student's As Thier Final Year Project In Departmanet of ITC at Sindh Agriculture University Tando Jam
+                  ''',
+                    applicationVersion: '1.0',
+                    children: [
+                      Column(
+                          children: contactInfo
+                              .map((e) => ListTile(
+                                    title: Text("${e.title}"),
+                                    subtitle: Text("${e.data}"),
+                                  ))
+                              .toList())
+                    ]),
               },
             ),
             Container(

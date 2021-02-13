@@ -7,7 +7,7 @@ class UsageRecord extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
             title: Center(
@@ -18,7 +18,7 @@ class UsageRecord extends StatelessWidget {
             bottom: TabBar(tabs: [
               Tab(text: "TDS"),
               Tab(text: "Sensor KIT"),
-              Tab(text: "Contact"),
+              // Tab(text: "Contact"),
             ]),
           ),
           body: TabBarView(
@@ -27,8 +27,8 @@ class UsageRecord extends StatelessWidget {
                   child: TdsData(
                 Tdsdata: Tdsdata,
               )),
-              TdsData(Tdsdata: Tdsdata),
-              TdsData(Tdsdata: Tdsdata),
+              TdsData(Tdsdata: sensorKitData),
+              // TdsData(Tdsdata: contactInfo),
             ],
           ),
         ),

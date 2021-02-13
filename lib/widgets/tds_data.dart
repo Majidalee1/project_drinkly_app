@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class TdsData extends StatelessWidget {
   final List<Usageinfo> Tdsdata;
 
-  const TdsData({this.Tdsdata});
+  TdsData({this.Tdsdata});
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +26,19 @@ class TdsData extends StatelessWidget {
             expanded: item.hasImg == true
                 ? Column(
                     children: [
-                      Text(item.data),
+                      Text(
+                        item.data,
+                        style: TextStyle(),
+                        textAlign: TextAlign.justify,
+                      ),
                       Divider(height: 30),
                       Image.asset(item.imgUrl),
                     ],
                   )
-                : Text(item.data),
+                : Text(
+                    item.data,
+                    textAlign: TextAlign.justify,
+                  ),
           ),
         );
       }).toList(),

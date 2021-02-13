@@ -1,5 +1,5 @@
 import 'package:drinkly/screens/main_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/Material.dart';
 
 void main() => runApp(MyApp());
 

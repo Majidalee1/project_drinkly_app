@@ -16,7 +16,7 @@ class _MeterScreenState extends State<MeterScreen> {
   var demoTdsValue = 200;
   var tdsValue = 10;
   var maxValue = 0;
-  var tdsTemp = 0.0;
+  dynamic tdsTemp = 0.0;
   final databaseReferenceTest = FirebaseDatabase.instance.reference();
 
   sendMessage() {
@@ -32,7 +32,7 @@ class _MeterScreenState extends State<MeterScreen> {
   }
 
   double get getTdsValue {
-    if (tdsValue == Null) {
+    if (tdsValue == null) {
       tdsValue = 0;
     } else if (tdsValue >= 990) {
       tdsValue = 990;
@@ -59,6 +59,12 @@ class _MeterScreenState extends State<MeterScreen> {
   void getConnectionStatus() async {
     if (await ConnectionVerify.connectionStatus()) {
       print("I have network connection!");
+      for (int i = 0; i <= 2; i++) {
+        Fluttertoast.showToast(
+          msg: "Insert Probes into water",
+          backgroundColor: Colors.green,
+        );
+      }
       //Do your online stuff here
     } else {
       print("I don't have network connection!");
@@ -83,14 +89,17 @@ class _MeterScreenState extends State<MeterScreen> {
       home: Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
-          title: Text("Drinkly"),
+          title: Text(
+            "Drinkly",
+            style: TextStyle(fontFamily: 'Raleway', fontSize: 24),
+          ),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 200,
+              height: 150,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -102,31 +111,34 @@ class _MeterScreenState extends State<MeterScreen> {
                     ),
                   ),
                   Container(
-                    height: 120,
+                    height: 70,
                     child: Image.asset('assets/images/centigrade.png'),
                   ),
                 ],
               ),
             ),
-            Text("TDS VALUE",
-                style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Raleway')),
+            Text(
+              "TDS VALUE",
+              style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Raleway'),
+            ),
+            Image.asset(
+              'assets/images/strip-main.png',
+              height: 70,
+            ),
             Stack(
               alignment: Alignment.center,
               children: [
-                SafeArea(
-                  bottom: true,
-                  child: Container(
-                    child: CircleWaveProgress(
-                      size: MediaQuery.of(context).size.height * 0.50,
-                      borderWidth: 10.0,
-                      backgroundColor: Colors.transparent,
-                      borderColor: Colors.black45,
-                      waveColor: getColor,
-                      progress: getTdsValue,
-                    ),
+                Container(
+                  child: CircleWaveProgress(
+                    size: MediaQuery.of(context).size.height * 0.50,
+                    borderWidth: 10.0,
+                    backgroundColor: Colors.transparent,
+                    borderColor: Colors.black45,
+                    waveColor: getColor,
+                    progress: getTdsValue,
                   ),
                 ),
                 Align(
